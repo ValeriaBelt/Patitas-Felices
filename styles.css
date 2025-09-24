@@ -1,3 +1,7 @@
+h1 {
+  font-size: 2.8rem;
+  color: #7d5a5a;
+}
 
 * {
   margin: 0;
@@ -8,17 +12,17 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #fef9f9; /* pastel suave */
+  background-color: #fef9f9; 
   color: #333;
   padding: 0 20px;
 }
 
-/* Header */
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffe5ec; /* rosado pastel */
+  background-color: #ffe5ec; 
   padding: 15px 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -27,19 +31,17 @@ header {
 .logo-container {
   display: flex;
   align-items: center;
+
 }
 
 .logo {
-  height: 60px; /* ajusta el tamaño del logo */
+  height: 60px;
+  width: 60px;
   margin-right: 10px;
+  object-fit: cover;
 }
 
-header h1 {
-  font-size: 1.5rem;
-  color: #7d5a5a;
-}
 
-/* Navegación */
 nav ul {
   list-style: none;
   display: flex;
@@ -54,12 +56,12 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #ff6f91; /* un pastel más fuerte */
+  color: #ff6f91; 
 }
 
-/* Secciones */
+
 main section {
-  background: #fff0f6; /* fondo pastel */
+  background: #fff0f6; 
   padding: 20px;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -71,7 +73,7 @@ main h2, main h3 {
   margin-bottom: 10px;
 }
 
-/* Footer */
+
 footer {
   text-align: center;
   margin-top: 20px;
@@ -81,10 +83,53 @@ footer {
   color: #7d5a5a;
 }
 
+/* Responsive Design */
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .logo-container {
+    justify-content: center;
+    width: 100%;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 5px;
+  }
+  header {
+    padding: 10px 5px;
+  }
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  main section {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  nav ul {
+    font-size: 1rem;
+  }
+}
+
 .logo {
-  width: 120px;   /* Ajusta el tamaño */
-  height: auto;   /* Mantiene proporciones */
+  width: 120px;   
+  height: auto;   
   display: block;
-  margin: 0 auto 10px auto; /* Centrado con espacio abajo */
+  margin: 0 auto 10px auto; 
 }
 
