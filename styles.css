@@ -1,6 +1,7 @@
 h1 {
   font-size: 2.8rem;
   color: #7d5a5a;
+  text-align: center;
 }
 
 * {
@@ -83,7 +84,7 @@ footer {
   color: #7d5a5a;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 900px) {
   header {
     flex-direction: column;
@@ -131,5 +132,10 @@ footer {
   height: auto;   
   display: block;
   margin: 0 auto 10px auto; 
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
