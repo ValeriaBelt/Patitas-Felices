@@ -81,13 +81,14 @@ footer {
 
 .galeria {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 40px;
-  margin: 30px 0;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin: 30px auto;
   width: 100%;
   max-width: 1200px;
   justify-items: center;
 }
+
 
 .animal-card {
   background: #fff;
@@ -183,4 +184,44 @@ h1 {
     width: 100%;
     height: auto;
   }
+}
+.filtros {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.btn-filtro {
+  background: #ffb6c1;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-filtro:hover {
+  background: #ff6f91;
+  color: white;
+}
+.filter-btn {
+  background-color: #ffb6c1;   /* Rosa claro, igual al esquema */
+  border: none;
+  padding: 10px 18px;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: Arial, sans-serif; /* Igual que body */
+  font-size: 1rem;
+  color: #7d5a5a;  /* Mismo tono del texto principal */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* como las tarjetas */
+}
+
+.filter-btn:hover {
+  background-color: #ff6f91; /* rosa más fuerte al pasar */
+  color: #fff;
+  transform: scale(1.05); /* pequeño efecto al pasar */
 }
