@@ -225,3 +225,35 @@ h1 {
   color: #fff;
   transform: scale(1.05); /* pequeño efecto al pasar */
 }
+
+.formulario-donacion {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.formulario-donacion h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formulario-donacion input,
+.formulario-donacion select,
+.formulario-donacion textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.imagen-noticia {
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+  object-fit: cover;
+}

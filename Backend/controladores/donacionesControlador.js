@@ -1,31 +1,46 @@
 const pool = require('../base-datos/conexionSQL');
 const enviarWhatsApp = require('../servicios/whatsapp');
 
+const medios = {
+  Nequi: 'Nequi 3001234567',
+  Bancolombia: 'Cuenta Bancolombia 123-456789-01'
+};
+
+const generarMensajeDonacion = ({ nombre, medio, monto }) => {
+  return `🎉 ¡Hola ${nombre}! Gracias por tu generosa donación de $${monto.toLocaleString()} COP a Patitas Felices 🐾.
+
+Tu aporte será destinado al bienestar de nuestros peluditos en adopción.
+
+👉 Medio de pago seleccionado: ${medio}
+
+📌 En breve recibirás confirmación del proceso. Si tienes dudas, puedes escribirnos directamente por este chat.
+
+¡Gracias por hacer parte de esta causa! 💛`;
+};
+
 const registrarDonacion = async (req, res) => {
-  const { nombre, telefono, tipo, monto, descripcion } = req.body;
+const { nombre, telefono, monto, medio, mensaje } = req.body;
 
   try {
     await pool.request()
-      .input('nombre', nombre)
-      .input('telefono', telefono)
-      .input('tipo', tipo)
-      .input('monto', monto || null)
-      .input('descripcion', descripcion || null)
-      .query(`
-        INSERT INTO donaciones (nombre, telefono, tipo, monto, descripcion)
-        VALUES (@nombre, @telefono, @tipo, @monto, @descripcion)
-      `);
-
-    const mensaje = tipo === 'dinero'
-      ? `Hola ${nombre}, gracias por tu donación de $${monto} a Patitas Felices 🐾. ¡Tu ayuda hace la diferencia!`
-      : `Hola ${nombre}, gracias por tu aporte manual a Patitas Felices 🐾. ¡Tu ayuda hace la diferencia!`;
-
-    await enviarWhatsApp(telefono, mensaje);
+  .input('nombre', nombre)
+  .input('telefono', telefono)
+  .input('monto', monto)
+  .input('medio', medio)
+  .input('mensaje', mensaje || '')
+  .query(`
+    INSERT INTO donaciones (nombre, telefono, monto, medio, mensaje)
+    VALUES (@nombre, @telefono, @monto, @medio, @mensaje)
+  `);
+  const texto = generarMensajeDonacion({ nombre, medio: medios[medio], monto });
+  
+  await enviarWhatsApp(telefono, texto);
 
     res.status(201).json({ mensaje: 'Donación registrada y mensaje enviado por WhatsApp' });
   } catch (error) {
     console.error('❌ Error al registrar donación:', error);
-    res.status(500).json({ mensaje: 'Error al registrar donación' });
+    res.status(500).json({ mensaje: 'Error al registrar donación', detalle: error.message });
+
   }
 };
 

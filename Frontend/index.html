@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
   <title>Patitas Felices</title> 
 </head>
 <body>
@@ -12,14 +12,15 @@
     <div class="logo-container">
       <img src="images/logo.jpg" alt="Logo Patitas Felices" class="logo">
     </div>
-      <h1>Patitas Felices</h1>
+    <h1>Patitas Felices</h1>
 
-    <nav>
+    <nav aria-label="Navegación principal">
       <ul>
-  <li><a href="secciones/adopcion.html">Adopción</a></li>
-  <li><a href="secciones/donacion.html">Donación</a></li>
-  <li><a href="secciones/voluntariado.html">Voluntariado</a></li>
-  <li><a href="secciones/noticias.html">Noticias</a></li>
+        <li><a href="secciones/adopcion.html" title="Ver animales disponibles para adopción">Adopción</a></li>
+        <li><a href="secciones/donacion.html" title="Contribuye con una donación">Donación</a></li>
+        <li><a href="secciones/voluntariado.html" title="Únete como voluntario">Voluntariado</a></li>
+        <li><a href="secciones/noticias.html" title="Lee las últimas noticias">Noticias</a></li>
+        <li><a href="admin/login.html" title="Acceso para administradores">Administrador</a></li>
       </ul>
     </nav>
   </header>
@@ -30,35 +31,45 @@
     </section>
 
     <section class="muestra-intro">
-      <h2>Animales en Adopción </h2>
-      <div class="galeria">
-        <div class="animal-card">
-          <img src="images/Perro1.webp" alt="Perro en adopción" class="animal-img">
-          <h4>MAX</h4>
-          <p>Max es un perro juguetón y cariñoso que busca una familia que le brinde amor y aventuras.</p>
-        </div>
-        <div class="animal-card">
-          <img src="images/Gato1.jpg" alt="Gato en adopción" class="animal-img">
-          <h4>LUNA</h4>
-          <p>Luna es una gatita curiosa y dulce, ideal para quienes buscan una compañera tranquila y amorosa.</p>
-        </div>
-        <div class="animal-card">
-          <img src="images/Conejo1.jpg" alt="Conejo en adopción" class="animal-img">
-          <h4>NIEVE</h4>
-          <p>Nieve es alguien que le gusta comer mucho las zanahorias y estar acurrucado contigo. Es muy traquilo y facil de cuidar.</p>
-        </div>
-        <div class="animal-card">
-          <img src="images/Loro1.jpg" alt="Loro en adopción" class="animal-img">
-          <h4>NANO</h4>
-          <p></p>
-        </div>
-      </div>
+      <h2>Animales en Adopción</h2>
+      <div id="galeriaAdopciones" class="galeria"></div>
     </section>
   </main>
-</body>
 
   <footer>
     <p>© 2025 Patitas Felices. Todos los derechos reservados.</p>
   </footer>
 
+  <script>
+    async function cargarAnimales() {
+      try {
+        const res = await fetch('http://localhost:3000/admin/adopciones');
+        const animales = await res.json();
+        const contenedor = document.getElementById('galeriaAdopciones');
+        contenedor.innerHTML = '';
+
+        if (animales.length === 0) {
+          contenedor.innerHTML = '<p>No hay animales publicados aún.</p>';
+          return;
+        }
+
+        animales.forEach(a => {
+          const card = document.createElement('div');
+          card.className = 'animal-card';
+          card.innerHTML = `
+            <img src="http://localhost:3000/images/${a.imagen}" alt="Foto de ${a.nombre}" class="animal-img" onerror="this.src='images/default.jpg'" />
+            <h4>${a.nombre}</h4>
+            <p>${a.descripcion}</p>
+          `;
+          contenedor.appendChild(card);
+        });
+      } catch (error) {
+        console.error('❌ Error al cargar animales:', error);
+        document.getElementById('galeriaAdopciones').innerHTML = '<p>Error al cargar animales. Intenta más tarde.</p>';
+      }
+    }
+
+    cargarAnimales();
+  </script>
+</body>
 </html>
